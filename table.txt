@@ -14,7 +14,7 @@
     capacity: Array[string],
     price: Array[string],
     promotion: Array[string],
-    category: string,
+    category: string (references category (name))
     description: Array[string],
     created_at datetime,
 	updated_at datetime,
