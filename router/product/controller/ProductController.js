@@ -1,7 +1,5 @@
 const ProductService = require("../services/ProductService");
 
-require("dotenv");
-
 class ProductController extends ProductService {
   testFunction = async (req, res) => {
     try {

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const authRouter = require("./router/Auth/auth");
 const productRouter = require("./router/product/index");
+const categoryRouter = require("./router/category/index");
 const mongoose = require("mongoose");
 
 //DB CONNECT
@@ -18,6 +19,7 @@ app.use(cors());
 
 //ROUTER
 app.use("/api/users", authRouter);
+app.use("/category", categoryRouter);
 app.use("/product", productRouter);
 
 app.listen(process.env.PORT, () => console.log("Server up and running"));
