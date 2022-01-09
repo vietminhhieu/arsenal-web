@@ -1,0 +1,68 @@
+1. table category (
+    id: int (primary key auto_increment),
+    name: string,
+    created_at datetime,
+	updated_at datetime,
+)
+
+2. table product (  
+    id: string,
+    id_category: int (references category (id)),
+    name: string,
+    thumbnail: Array[string],
+    color: Array[string], 
+    capacity: Array[string],
+    price: Array[string],
+    promotion: Array[string],
+    category: string,
+    description: Array[string],
+    created_at datetime,
+	updated_at datetime,
+    visited: number 
+)
+
+3. table extraInfo (
+    id_product: int (references product (id)),
+    screenSize: string,
+    screenTechnology: string,
+    resolution: string,
+    frontCamera: string,
+    backCamera: Array[string],
+    video: Array[string],
+    chip: string,
+    ram: string, 
+    battery: string,
+    chargeTechnology: Array[string],
+    chargePort: string,
+    sim: string,
+    operatingSystem: string,
+    size: string,
+    weight: string,
+    backMaterial: string,
+    borderMaterial: string,
+)
+
+4. table feedback (
+    id_product: int (references product (id)),
+    customerName: string,
+    avatar: string, 
+    submitTime: datetime,
+    rating: number,
+    feedbackContent: string,
+)
+
+5.table comment (
+    id_product: int (references product (id)),
+    customerName: string,
+    commentContent: string,
+    commentTime: datetime,
+    adminName: string,
+    response: string,
+)
+
+* Các chức năng chính:
+    - Đăng nhập / Đăng ký / Lấy lại mật khẩu
+    - Sửa thông tin người dùng
+    - Gọi điện, chat với khách hàng
+    - Thêm vào giỏ hàng
+    - Thanh toán
