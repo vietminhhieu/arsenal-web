@@ -3,6 +3,7 @@ const User = require("../../model/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const env = require("../../config/env");
 
 const forgetPW_uConfirm = async (req, res) => {
   //CÁC BIẾN SỬ DỤNG
@@ -19,10 +20,7 @@ const forgetPW_uConfirm = async (req, res) => {
   const hashPW = await bcrypt.hash(password, salt);
 
   //TẠO RA TOKEN
-  const forgetPWToken = await jwt.sign(
-    { email, hashPW },
-    process.env.SECRET_TOKEN
-  );
+  const forgetPWToken = await jwt.sign({ email, hashPW }, env.secret_token);
   console.log("forgetPWToken: ", forgetPWToken);
 
   //GỬI MẪU THƯ XÁC NHẬN CHO USER
@@ -31,14 +29,14 @@ const forgetPW_uConfirm = async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.ARS_EMAIL,
-        pass: process.env.ARS_PASSWORD,
+        user: env.admin_email,
+        pass: env.admin_password,
       },
     });
 
     //BƯỚC 2
     let mailOption = {
-      from: process.env.ARS_EMAIL,
+      from: env.admin_email,
       to: email,
       subject: "Password Recovery",
       text: "You have confirmed successfully",
@@ -66,7 +64,7 @@ const forgetPW_Confirm = async (req, res) => {
     //GIÃI MÃ TOKEN
     const forgetPWConfirmToken = await jwt.verify(
       req.params.token,
-      process.env.SECRET_TOKEN
+      env.secret_token
     );
 
     //CÁC BIẾN CẦN SỬ DỤNG
@@ -83,12 +81,10 @@ const forgetPW_Confirm = async (req, res) => {
 
     await User.findOneAndUpdate({ email }, updateForgetPW, { new: true });
 
-    res
-      .status(200)
-      .send({
-        success: true,
-        message: "You have changed password succesfully",
-      });
+    res.status(200).send({
+      success: true,
+      message: "You have changed password succesfully",
+    });
   } catch (error) {
     console.log(error);
   }

@@ -3,6 +3,7 @@ const User = require("../../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const httpResponseCode = require("../../common/constants");
+const env = require("../../config/env");
 
 const login = async (req, res) => {
   console.log(req.body);
@@ -29,10 +30,7 @@ const login = async (req, res) => {
         .json({ success: false, message: "Invalid password" });
 
     //CREATE TOKEN
-    const loginToken = await jwt.sign(
-      { _id: user._id },
-      process.env.SECRET_TOKEN
-    );
+    const loginToken = await jwt.sign({ _id: user._id }, env.secret_token);
     //   console.log("loginToken: ", loginToken);
 
     res.status(200).json({ success: true, data: { loginToken, user } });

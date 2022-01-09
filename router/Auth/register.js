@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const httpResponseCode = require("../../common/constants");
+const env = require("../../config/env");
 
 const register_uConfirm = async (req, res) => {
   //CÁC BIẾN CẦN SỬ DỤNG
@@ -24,7 +25,7 @@ const register_uConfirm = async (req, res) => {
   const hashPW = await bcrypt.hash(password, salt);
 
   //TẠO 1 TOKEN
-  const registerToken = jwt.sign({ email, hashPW }, process.env.SECRET_TOKEN);
+  const registerToken = jwt.sign({ email, hashPW }, env.secret_token);
   console.log("registerToken: ", registerToken);
 
   //TẠO MỘT TÀI KHOẢN
@@ -43,14 +44,14 @@ const register_uConfirm = async (req, res) => {
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.ARS_EMAIL,
-        pass: process.env.ARS_PASSWORD,
+        user: env.admin_email,
+        pass: env.admin_password,
       },
     });
 
     //BƯỚC 2
     let mailOption = {
-      from: process.env.ARS_EMAIL,
+      from: env.admin_email,
       to: email,
       subject: "Register Account",
       html: `
@@ -131,10 +132,7 @@ const register_uConfirm = async (req, res) => {
 const register_confirm = async (req, res) => {
   try {
     //GIẢI MÃ
-    const registerConfirmToken = jwt.verify(
-      req.params.token,
-      process.env.SECRET_TOKEN
-    );
+    const registerConfirmToken = jwt.verify(req.params.token, env.secret_token);
     console.log(registerConfirmToken);
 
     // CÁC BIẾN CẦN SỬ DỤNG
