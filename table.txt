@@ -6,7 +6,7 @@
 )
 
 2. table product (  
-    id: string,
+    id: int (primary key auto_increment),
     id_category: int (references category (id)),
     name: string,
     thumbnail: Array[string],
@@ -14,50 +14,55 @@
     capacity: Array[string],
     price: Array[string],
     promotion: Array[string],
-    category: string (references category (name))
+    category: string (references category (name)),
     description: Array[string],
+    visited: number,
     created_at datetime,
 	updated_at datetime,
-    visited: number 
 )
 
 3. table extraInfo (
     id_product: int (references product (id)),
-    screenSize: string,
     screenTechnology: string,
     resolution: string,
+    screenSize: string,
+    backCamera: string,
+    video: string,
     frontCamera: string,
-    backCamera: Array[string],
-    video: Array[string],
-    chip: string,
-    ram: string, 
-    battery: string,
-    chargeTechnology: Array[string],
-    chargePort: string,
-    sim: string,
     operatingSystem: string,
+    chip: string,
+    cpu: string,
+    gpu: string,
+    ram: string, 
+    internalMemory: string
+    sim: string,
+    wifi: string,
+    gps: string,
+    bluetooth: string, 
     size: string,
     weight: string,
-    backMaterial: string,
-    borderMaterial: string,
+    batteryCapacity: string,
+    batteryType: string,
 )
 
 4. table feedback (
     id_product: int (references product (id)),
-    customerName: string,
+    customerName: array[string],
     avatar: string, 
-    submitTime: datetime,
-    rating: number,
-    feedbackContent: string,
+    submitTime: array[datetime],
+    rating: array[number],
+    feedbackContent: array[string],
 )
 
 5.table comment (
     id_product: int (references product (id)),
-    customerName: string,
-    commentContent: string,
-    commentTime: datetime,
+    customerName: array[string],
+    customerAvatar: string,
+    commentContent: array[string],
+    commentTime: array[datetime],
     adminName: string,
-    response: string,
+    adminAvatar: string
+    response: array[string],
 )
 
 * Các chức năng chính:

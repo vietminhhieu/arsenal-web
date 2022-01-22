@@ -1,14 +1,14 @@
 const httpResponseCode = require("../common/constants");
 
 class HttpError extends Error {
-  messageKey;
   statusCode;
 
-  constructor(message = httpResponseCode[544]) {
+  constructor(messageErr = httpResponseCode[544]) {
     super();
     Object.setPrototypeOf(this, HttpError.prototype);
     this.name = this.constructor.name;
-    this.message = message;
+    this.message = messageErr;
+    this.statusCode = 544;
   }
 }
 

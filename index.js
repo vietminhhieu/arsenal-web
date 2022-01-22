@@ -1,4 +1,3 @@
-require("dotenv/config");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -23,6 +22,4 @@ app.use("/api/users", authRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server is running at ${env.port}`)
-);
+app.listen(env.port, () => console.log(`Server is running at ${env.port}`));

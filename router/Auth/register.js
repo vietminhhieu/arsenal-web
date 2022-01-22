@@ -8,17 +8,17 @@ const env = require("../../config/env");
 
 const register_uConfirm = async (req, res) => {
   //CÁC BIẾN CẦN SỬ DỤNG
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const password = req.body.password;
+  const { firstName, lastName, email, password } = req.body;
 
   //KIỂM TRA XEM EMAIL ĐÃ TỒN TẠI TRONG DB CHƯA
   const existedEmail = await User.findOne({ email });
   if (existedEmail)
     return res
       .status(400)
-      .send({ success: false, message: "Email has already existed" });
+      .json({
+        success: false,
+        message: "Email đã tồn tại. Vui lòng dùng email khác!",
+      });
 
   //MÃ HÓA MẬT KHẨU
   const salt = await bcrypt.genSalt(10);
@@ -26,7 +26,7 @@ const register_uConfirm = async (req, res) => {
 
   //TẠO 1 TOKEN
   const registerToken = jwt.sign({ email, hashPW }, env.secret_token);
-  console.log("registerToken: ", registerToken);
+  // console.log("registerToken: ", registerToken);
 
   //TẠO MỘT TÀI KHOẢN
   const user = new User({
@@ -114,13 +114,13 @@ const register_uConfirm = async (req, res) => {
     //BƯỚC 3
     transporter.sendMail(mailOption, async (err, data) => {
       if (err) {
-        console.log("Error when send mail: ", err);
+        console.log("Lỗi khi gửi email: ", err);
       } else {
-        console.log("Email have sent!");
+        console.log("Email đã được gửi!");
         await user.save();
         res.status(200).send({
           success: true,
-          message: "You have created account successfully",
+          message: "Bạn đã tạo tài khoản thành công",
         });
       }
     });
@@ -133,11 +133,10 @@ const register_confirm = async (req, res) => {
   try {
     //GIẢI MÃ
     const registerConfirmToken = jwt.verify(req.params.token, env.secret_token);
-    console.log(registerConfirmToken);
+    // console.log(registerConfirmToken);
 
     // CÁC BIẾN CẦN SỬ DỤNG
-    const email = registerConfirmToken.email;
-    const password = registerConfirmToken.password;
+    const { email, password } = registerConfirmToken;
 
     //UPDATE DB
     const updateRegister = {
@@ -149,7 +148,7 @@ const register_confirm = async (req, res) => {
 
     await User.findOneAndUpdate({ email }, updateRegister, { new: true });
 
-    res.json({ success: true, message: "Your account have activated" });
+    res.json({ success: true, message: "Tài khoản của bạn đã được kích hoạt" });
   } catch (err) {
     res.status(500).json({ success: false, message: httpResponseCode[500] });
   }

@@ -19,7 +19,10 @@ const login = async (req, res) => {
     if (!user)
       return res
         .status(400)
-        .json({ success: false, message: "Email is not found" });
+        .json({
+          success: false,
+          message: "Email không tồn tại. Vui lòng nhập lại email!",
+        });
 
     //PASSWORD IS CORRECT
     const validPass = await bcrypt.compare(password, user.password);

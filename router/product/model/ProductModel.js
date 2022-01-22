@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const type = mongoose.Schema.Types;
 
 const productSchema = mongoose.Schema({
+  id_category: {},
   name: {
     type: type.String,
     require: true,
@@ -36,7 +37,15 @@ const productSchema = mongoose.Schema({
   },
   visited: {
     type: type.Number,
-    require: true,
+    default: Math.random() * 1000,
+  },
+  created_at: {
+    type: type.Date,
+    default: new Date(),
+  },
+  updated_at: {
+    type: type.Date,
+    default: new Date(),
   },
 });
 

@@ -4,7 +4,8 @@ class ProductController extends ProductService {
   testFunction = async (req, res) => {
     try {
       this.logMessage();
-      res.send("OK");
+      const result = await this.createNewRecord("Apple");
+      res.send(result.name);
     } catch (error) {
       console.log(error);
     }
