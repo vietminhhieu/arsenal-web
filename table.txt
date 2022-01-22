@@ -52,6 +52,8 @@
     submitTime: array[datetime],
     rating: array[number],
     feedbackContent: array[string],
+    created_at datetime,
+	updated_at datetime,
 )
 
 5.table comment (
@@ -63,6 +65,8 @@
     adminName: string,
     adminAvatar: string
     response: array[string],
+    created_at datetime,
+	updated_at datetime,
 )
 
 * Các chức năng chính:

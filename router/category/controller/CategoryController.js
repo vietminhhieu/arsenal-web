@@ -58,6 +58,7 @@ class CategoryController extends CategoryService {
         { _id: req.params.categoryId },
         { $set: { name: req.body.name } }
       );
+
       res.send("Sửa danh mục thành công");
     } catch (err) {
       res.json({ message: err });

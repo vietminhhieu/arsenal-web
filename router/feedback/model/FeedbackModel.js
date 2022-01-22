@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 const type = mongoose.Schema.Types;
 
 const feedbackSchema = mongoose.Schema({
-  customerName: {
+  id_product: {
     type: type.String,
+    require: true,
+  },
+  customerName: {
+    type: type.Array,
     require: true,
   },
   avatar: {
@@ -11,16 +15,24 @@ const feedbackSchema = mongoose.Schema({
     require: true,
   },
   submitTime: {
-    type: type.Date,
+    type: type.Array,
     require: true,
   },
   rating: {
-    type: type.Number,
+    type: type.Array,
     require: true,
   },
   feedbackContent: {
-    type: type.String,
+    type: type.Array,
     require: true,
+  },
+  created_at: {
+    type: type.Date,
+    default: new Date(),
+  },
+  updated_at: {
+    type: type.Date,
+    default: new Date(),
   },
 });
 

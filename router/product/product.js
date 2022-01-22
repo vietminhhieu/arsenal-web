@@ -1,8 +1,7 @@
+const router = require("express").Router();
 const HttpError = require("../../errors/httpError");
 const InternalServerError = require("../../errors/InternalServerError");
 const ProductController = require("./controller/productController");
-
-const router = require("express").Router();
 
 // router.get("/test", ProductController.testFunction);
 

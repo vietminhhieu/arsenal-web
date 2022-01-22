@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const type = mongoose.Schema.Types;
 
 const extraInfoSchema = mongoose.Schema({
-  screenSize: {
+  id_product: {
     type: type.String,
     require: true,
   },
@@ -14,19 +14,35 @@ const extraInfoSchema = mongoose.Schema({
     type: type.String,
     require: true,
   },
-  frontCamera: {
+  screenSize: {
     type: type.String,
     require: true,
   },
   backCamera: {
-    type: type.Array,
+    type: type.String,
     require: true,
   },
   video: {
-    type: type.Array,
+    type: type.String,
+    require: true,
+  },
+  frontCamera: {
+    type: type.String,
+    require: true,
+  },
+  operatingSystem: {
+    type: type.String,
     require: true,
   },
   chip: {
+    type: type.String,
+    require: true,
+  },
+  cpu: {
+    type: type.String,
+    require: true,
+  },
+  gpu: {
     type: type.String,
     require: true,
   },
@@ -34,15 +50,7 @@ const extraInfoSchema = mongoose.Schema({
     type: type.String,
     require: true,
   },
-  battery: {
-    type: type.String,
-    require: true,
-  },
-  chargeTechnology: {
-    type: type.Array,
-    require: true,
-  },
-  chargePort: {
+  internalMemory: {
     type: type.String,
     require: true,
   },
@@ -50,7 +58,15 @@ const extraInfoSchema = mongoose.Schema({
     type: type.String,
     require: true,
   },
-  operatingSystem: {
+  wifi: {
+    type: type.String,
+    require: true,
+  },
+  gps: {
+    type: type.String,
+    require: true,
+  },
+  bluetooth: {
     type: type.String,
     require: true,
   },
@@ -62,11 +78,11 @@ const extraInfoSchema = mongoose.Schema({
     type: type.String,
     require: true,
   },
-  backMaterial: {
+  batteryCapacity: {
     type: type.String,
     require: true,
   },
-  borderMaterial: {
+  batteryType: {
     type: type.String,
     require: true,
   },

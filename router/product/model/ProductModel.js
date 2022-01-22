@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const type = mongoose.Schema.Types;
 
 const productSchema = mongoose.Schema({
-  id_category: {},
+  id_category: {
+    type: type.String,
+    require: true,
+  },
   name: {
     type: type.String,
     require: true,
