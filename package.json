@@ -33,5 +33,8 @@
     "url": "https://github.com/vietminhhieu/backend-smartphone-web/issues"
   },
   "homepage": "https://github.com/vietminhhieu/backend-smartphone-web#readme",
-  "description": ""
+  "description": "",
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
 }
