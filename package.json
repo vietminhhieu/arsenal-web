@@ -1,13 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +23,15 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vietminhhieu/backend-smartphone-web.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/vietminhhieu/backend-smartphone-web/issues"
+  },
+  "homepage": "https://github.com/vietminhhieu/backend-smartphone-web#readme",
+  "description": ""
 }
