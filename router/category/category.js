@@ -6,6 +6,7 @@ router.get("/:categoryId", CategoryController.getOneCategoryFromDatabase);
 router.post("/", CategoryController.addOneCategoryToDatabase);
 router.patch("/:categoryId", CategoryController.updateOneCategoryFromDatabase);
 router.delete("/:categoryId", CategoryController.deleteOneCategoryFromDatabase);
+router.delete("/", CategoryController.deleteAllCategoryFromDatabase);
 // //Lấy ra tất cả các category từ CSDL
 // router.get("/", async (req, res) => {
 //   try {

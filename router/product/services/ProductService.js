@@ -1,13 +1,16 @@
 const CategoryRepository = require("../../category/repositories/CategoryRepository");
 
 class ProductService {
-  logMessage = () => {
-    console.log("Hahaa");
-  };
+  getCategoryIdFromService = async (categoryName) => {
+    let res;
 
-  createNewRecord = async (data) => {
-    const cd = await CategoryRepository.findCategoryDetailByName("Apple");
-    return cd;
+    const categoryRecord = await CategoryRepository.getCategoryIdFromCategory(
+      categoryName
+    );
+
+    res = { category_id: categoryRecord._id };
+
+    return res;
   };
 }
 

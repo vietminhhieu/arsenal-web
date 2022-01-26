@@ -5,26 +5,29 @@ class CategoryRepository {
     return await CategoryModel.find();
   };
 
-  findOneCategory = async (cateId) => {
-    return await CategoryModel.findById(cateId);
+  findOneCategory = async (categoryId) => {
+    return await CategoryModel.findById(categoryId);
   };
 
-  addRecordCategory = async (cateName) => {
-    return await new CategoryModel(cateName).save();
+  addRecordCategory = async (categoryName) => {
+    return await new CategoryModel(categoryName).save();
   };
 
-  deleteRecordCategory = async (cateId) => {
-    console.log(cateId);
-    return await CategoryModel.remove(cateId);
+  deleteRecordCategory = async (categoryId) => {
+    return await CategoryModel.deleteOne(categoryId);
   };
 
-  updateRecordCategory = async (cateId, name) => {
-    return await CategoryModel.updateOne(cateId, name);
+  deleteAllCategory = async () => {
+    return await CategoryModel.remove();
   };
 
-  //Quang làm: dùng cho product
-  findCategoryDetailByName = async (name) => {
-    return CategoryModel.findOne({ name });
+  updateRecordCategory = async (categoryId, name) => {
+    return await CategoryModel.updateOne(categoryId, name);
+  };
+
+  //Sử dụng để lấy ra categoryID
+  getCategoryIdFromCategory = async (categoryName) => {
+    return await CategoryModel.findOne({ name: categoryName });
   };
 }
 

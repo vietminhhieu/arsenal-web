@@ -1,16 +1,11 @@
 const router = require("express").Router();
-const HttpError = require("../../errors/httpError");
-const InternalServerError = require("../../errors/InternalServerError");
 const ProductController = require("./controller/productController");
 
-// router.get("/test", ProductController.testFunction);
-
-router.get("/test", async (req, res) => {
-  try {
-    res.json(new InternalServerError());
-  } catch (error) {
-    console.log(error);
-  }
-});
-
+router.post("/getCategoryId", ProductController.getCategoryIdFromController);
+router.get("/", ProductController.getAllProductFromDatabase);
+router.get("/:productId", ProductController.getOneProductFromDatabase);
+router.post("/", ProductController.addOneProductToDatabase);
+router.patch("/:productId", ProductController.updateOneProductFromDatabase);
+router.delete("/:productId", ProductController.deleteOneProductFromDatabase);
+router.delete("/", ProductController.deleteAllProductFromDatabase);
 module.exports = router;

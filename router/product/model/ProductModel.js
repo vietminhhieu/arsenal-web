@@ -40,7 +40,7 @@ const productSchema = mongoose.Schema({
   },
   visited: {
     type: type.Number,
-    default: Math.random() * 1000,
+    default: Math.floor(Math.random() * 1000),
   },
   created_at: {
     type: type.Date,
