@@ -1,5 +1,5 @@
 const httpResponseCode = require("../common/constants");
-const HttpError = require("./httpError");
+const HttpError = require("./HttpError");
 
 class BadRequest extends HttpError {
   constructor(messageErr = httpResponseCode[400]) {
