@@ -8,4 +8,5 @@ router.post("/", ProductController.addOneProductToDatabase);
 router.patch("/:productId", ProductController.updateOneProductFromDatabase);
 router.delete("/:productId", ProductController.deleteOneProductFromDatabase);
 router.delete("/", ProductController.deleteAllProductFromDatabase);
+
 module.exports = router;

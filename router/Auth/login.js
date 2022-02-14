@@ -6,31 +6,40 @@ const httpResponseCode = require("../../common/constants");
 const env = require("../../config/env");
 
 const login = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   //VARIABLE USED
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   try {
     //CHECKING IF THE EMAIL EXISTS
     const user = await User.findOne({ email });
     //   console.log("user: ", user);
     if (!user)
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Email không tồn tại. Vui lòng nhập lại email!",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Email không tồn tại. Vui lòng nhập lại email!",
+      });
 
-    //PASSWORD IS CORRECT
+    //CHECKING PASSWORD IS CORRECT
     const validPass = await bcrypt.compare(password, user.password);
     //   console.log("validPass: ", validPass);
     if (!validPass)
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid password" });
+      return res.status(400).json({
+        success: false,
+        message: "Nhập sai mật khẩu. Vui lòng nhập lại mật khẩu!",
+      });
+
+    //CHECK ACCOUNT ACTIVE
+    const activeAccount = await User.findOne({ email });
+    const accountIsConfirm = activeAccount.isConfirm;
+    // console.log("accountIsConfirm", accountIsConfirm);
+    if (!accountIsConfirm)
+      return res.status(400).json({
+        success: false,
+        message:
+          "Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email của bạn (có thể trong thư rác) để kích hoạt tài khoản!",
+      });
 
     //CREATE TOKEN
     const loginToken = await jwt.sign({ _id: user._id }, env.secret_token);
