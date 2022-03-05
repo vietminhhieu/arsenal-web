@@ -192,12 +192,12 @@ const forgetPW_Confirm = async (req, res) => {
     // console.log("email", email);
 
     //MẬT KHẨU MỚI
-    const { password } = req.body;
+    const { newPassword } = req.body;
     // console.log("password", password);
 
     //MÃ HÓA MẬT KHẨU
     const salt = await bcrypt.genSalt(10);
-    const hashPW = await bcrypt.hash(password, salt);
+    const hashPW = await bcrypt.hash(newPassword, salt);
 
     //UPDATE DB
     const updateForgetPW = {
@@ -209,7 +209,7 @@ const forgetPW_Confirm = async (req, res) => {
 
     await User.findOneAndUpdate({ email }, updateForgetPW, { new: true });
 
-    res.status(200).send({
+    res.status(200).json({
       success: true,
       message: "Bạn đã thay đổi mật khẩu thành công",
     });
